@@ -1,171 +1,181 @@
 // Создание Observable из массива данных:
 
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 
-const numbers = [1, 2, 3, 4, 5];
-const numbers$ = new Observable(subscriber => {
-  numbers.forEach(number => subscriber.next(number));
-  subscriber.complete();
-});
+// const numbers = [1, 2, 3, 4, 5]; // Массив данные
+// const numbers$ = new Observable(subscriber => {
+//   numbers.forEach(number => subscriber.next(number));
+//   subscriber.complete();
+// });
 
-numbers$.subscribe(number => console.log(number));
+// // next, error, complite
+// numbers$.subscribe(number => console.log(number));
 
-// Создание Observable из события DOM:
+// // Создание Observable из события DOM:
 
-import { fromEvent } from 'rxjs';
+// import { fromEvent } from 'rxjs';
 
-const button = document.querySelector('button');
-const buttonClick$ = fromEvent(button, 'click');
+// const button = document.querySelector('button');
+// const buttonClick$ = fromEvent(button, 'click');
 
-buttonClick$.subscribe(event => console.log('Button clicked!'));
+// buttonClick$.subscribe(event => console.log('Button clicked!'));
 
-// Создание Observable из таймера:
+// // Создание Observable из таймера:
 
-import { timer } from 'rxjs';
+// import { timer } from 'rxjs';
 
-const timer$ = timer(2000);
+// const timer$ = timer(2000);
 
-timer$.subscribe(() => console.log('2 seconds have passed!'));
+// timer$.subscribe(() => console.log('2 seconds have passed!'));
 
 // Комбинирование нескольких Observable:
 
-import { Observable, fromEvent } from 'rxjs';
-import { map } from 'rxjs/operators';
+// import { Observable, fromEvent } from 'rxjs';
+// import { map } from 'rxjs/operators';
 
-const numbers$ = new Observable(subscriber => {
-  subscriber.next(1);
-  subscriber.next(2);
-  subscriber.next(3);
-  subscriber.complete();
-});
+// // number observable
+// const numbers$ = new Observable(subscriber => {
+//   subscriber.next(1);
+//   subscriber.next(2);
+//   subscriber.next(3);
+//   subscriber.complete();
+// });
 
-const button = document.querySelector('button');
-const buttonClick$ = fromEvent(button, 'click');
+// const button = document.querySelector('button');
 
-const combined$ = numbers$.pipe(
-  map(number => number * 2),
-  map(number => `Result: ${number}`)
-);
+// // button observable
+// const buttonClick$ = fromEvent(button, 'click');
 
-buttonClick$.subscribe(() => {
-  combined$.subscribe(result => console.log(result));
-});
+// const combined$ = numbers$.pipe(
+//   map(number => number * 2),
+//   map(number => `Result: ${number}`)
+// );
+
+// buttonClick$.subscribe(() => {
+//   combined$.subscribe(result => console.log(result));
+// });
 
 // Отслеживание изменений в форме:
 
-import { fromEvent } from 'rxjs';
-import { map } from 'rxjs/operators';
+// import { fromEvent } from 'rxjs';
+// import { map } from 'rxjs/operators';
 
-const input = document.querySelector('input');
-const input$ = fromEvent(input, 'input').pipe(
-  map(event => event.target.value)
-);
+// const input = document.querySelector('input');
+// const input$ = fromEvent(input, 'input').pipe(
+//   map(event => event.target.value)
+// );
 
-input$.subscribe(value => console.log(value));
+// input$.subscribe(value => console.log(value));
 
-// Запрос данных с сервера:
+// // Запрос данных с сервера:
 
-import { Observable } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
+// import { Observable } from 'rxjs';
+// import { ajax } from 'rxjs/ajax';
 
-const url = 'https://jsonplaceholder.typicode.com/users';
-const users$ = ajax.getJSON(url);
+// const url = 'https://jsonplaceholder.typicode.com/users';
+// const users$ = ajax.getJSON(url);
 
-users$.subscribe(users => console.log(users));
+// users$.subscribe(users => console.log(users));
 
-// Отслеживание кликов на кнопке:
+// // Отслеживание кликов на кнопке:
 
-import { fromEvent } from 'rxjs';
+// import { fromEvent } from 'rxjs';
 
-const button = document.querySelector('button');
-const buttonClick$ = fromEvent(button, 'click');
+// const button = document.querySelector('button');
+// const buttonClick$ = fromEvent(button, 'click');
 
-buttonClick$.subscribe(() => console.log('Button clicked!'));
+// buttonClick$.subscribe(() => console.log('Button clicked!'));
 
-// Отслеживание нажатия клавиш:
+// // Отслеживание нажатия клавиш:
 
-import { fromEvent } from 'rxjs';
-import { filter } from 'rxjs/operators';
+// import { fromEvent } from 'rxjs';
+// import { filter } from 'rxjs/operators';
 
-const input = document.querySelector('input');
-const input$ = fromEvent(input, 'keydown').pipe(
-  filter(event => event.key === 'Enter')
-);
+// const input = document.querySelector('input');
+// const input$ = fromEvent(input, 'keydown').pipe(
+//   filter(event => event.key === 'Enter')
+// );
 
-input$.subscribe(() => console.log('Enter key pressed!'));
+// input$.subscribe(() => console.log('Enter key pressed!'));
 
 // Отложенная отправка запроса:
 
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 
-const delay$ = new Observable(subscriber => {
-  setTimeout(() => {
-    subscriber.next('Data after delay!');
-    subscriber.complete();
-  }, 2000);
-});
+// const delay$ = new Observable(subscriber => {
+//   setTimeout(() => {
+//     subscriber.next('Data after delay!');
+//     subscriber.complete();
+//   }, 2000);
+// });
 
-delay$.subscribe(data => console.log(data));
+// delay$.subscribe(data => console.log(data));
 
-// Создание потока счетчика:
+// // Создание потока счетчика:
 
-import { Observable, interval } from 'rxjs';
+// import { Observable, interval } from 'rxjs';
 
-const counter$ = interval(1000);
+// const counter$ = interval(1000);
 
-counter$.subscribe(count => console.log(count));
+// counter$.subscribe(count => console.log(count));
 
 // Объединение нескольких потоков данных:
 
-import { Observable, combineLatest } from 'rxjs';
+// import { Observable, combineLatest } from 'rxjs';
 
-const letters$ = new Observable(subscriber => {
-  subscriber.next('A');
-  setTimeout(() => subscriber.next('B'), 2000);
-  setTimeout(() => subscriber.next('C'), 4000);
-});
+// const letters$ = new Observable(subscriber => {
+//   subscriber.next('A');
+//   setTimeout(() => subscriber.next('B'), 2000);
+//   setTimeout(() => subscriber.next('C'), 4000);
+// });
 
-const numbers$ = new Observable(subscriber => {
-  subscriber.next(1);
-  setTimeout(() => subscriber.next(2), 1000);
-  setTimeout(() => subscriber.next(3), 3000);
-});
+// const numbers$ = new Observable(subscriber => {
+//   subscriber.next(1);
+//   setTimeout(() => subscriber.next(2), 1000);
+//   setTimeout(() => subscriber.next(3), 3000);
+// });
 
-const combined$ = combineLatest([letters$, numbers$]);
+// // [ 'A', 1 ]
+// // [ 'A', 2 ]
+// // [ 'B', 2 ]
+// // [ 'B', 3 ]
+// // [ 'C', 3 ]
 
-combined$.subscribe(data => console.log(data));
+// const combined$ = combineLatest([letters$, numbers$]);
+
+// combined$.subscribe(data => console.log(data));
 
 // Фильтрация потока данных:
 
-import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+// import { Observable } from 'rxjs';
+// import { filter } from 'rxjs/operators';
 
-const numbers$ = new Observable(subscriber => {
-  subscriber.next(1);
-  subscriber.next(2);
-  subscriber.next(3);
-  subscriber.next(4);
-  subscriber.next(5);
-});
+// const numbers$ = new Observable(subscriber => {
+//   subscriber.next(1);
+//   subscriber.next(2);
+//   subscriber.next(3);
+//   subscriber.next(4);
+//   subscriber.next(5);
+// });
 
-const evenNumbers$ = numbers$.pipe(
-  filter(number => number % 2 === 0)
-);
+// const evenNumbers$ = numbers$.pipe(
+//   filter((number: any) => number % 2 === 0)
+// );
 
-evenNumbers$.subscribe(number => console.log(number));
+// evenNumbers$.subscribe(number => console.log(number));
 
-// Преобразование данных в потоке:
+// // Преобразование данных в потоке:
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+// import { Observable } from 'rxjs';
+// import { map } from 'rxjs/operators';
 
-const numbers$ = new Observable(subscriber => {
-  subscriber.next(1);
-  subscriber.next(2);
-  subscriber.next(3);
-  subscriber.next(4);
-  subscriber.next(5);
-});
+// const numbers$ = new Observable(subscriber => {
+//   subscriber.next(1);
+//   subscriber.next(2);
+//   subscriber.next(3);
+//   subscriber.next(4);
+//   subscriber.next(5);
+// });
 
-const squaredNumbers$ = numbers$.pipe(
-  map(number => number * number)
+// const squaredNumbers$ = numbers$.pipe(
+//   map(number => number * number)
